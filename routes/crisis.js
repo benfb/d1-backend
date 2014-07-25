@@ -18,7 +18,7 @@ router.post('/', function(req, res) {
         res.send("Messages sent successfully");
       },
       function (error) {
-        res.send("An error occurred while sending messages");
+        res.send(400, "An error occurred while sending messages");
       }
     );
   }
