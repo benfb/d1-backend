@@ -28,6 +28,7 @@ router.post('/', function(req, res) {
       }
     );
   }
+  numbers = [];
 });
 
 module.exports = router;
