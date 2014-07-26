@@ -5,9 +5,11 @@ var bodyParser = require('body-parser')
 var emails = [];
 
 router.post('/', function(req, res) {
-  console.log(req.body);
   for(var i = 0; i < req.body.selected.length; i++) {
     emails.push(req.body.selected[i].email);
+  }
+  if(req.body.user.name == null | req.body.user.phone == null || req.body.user.email == null) {
+    res.send(400, "You need to put in your user information in the settings page.")
   }
   sendgrid.send({
     to      : emails,
