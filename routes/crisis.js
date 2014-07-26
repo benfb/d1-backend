@@ -12,9 +12,12 @@ router.post('/', function(req, res) {
     return res.send(400, "You need to put in your user information in the settings page.");
   }
   for(var i = 0; i < req.body.selected.length; i++) {
+    numbers.push(req.body.selected[i].numbers);
+  }
+  for(var i = 0; i < numbers; i++) {
     telapi.create("sms_messages", {
         "From": process.env.TELAPI_NUMBER,
-        "To": req.body.selected[i].phone,
+        "To": numbers[i],
         "Body": req.body.user.name + ' is suicidal and needs help. Contact them and take them to a hospital to get a suicide assessment. If you can\'t reach them, call 911.'
       }, function (response) {
         res.send("Messages sent successfully");
