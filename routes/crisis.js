@@ -17,7 +17,7 @@ router.post('/', function(req, res) {
   for(var i = 0; i < numbers; i++) {
     telapi.create("sms_messages", {
         "From": process.env.TELAPI_NUMBER,
-        "To": numbers[i],
+        "To": number[i],
         "Body": req.body.user.name + ' is suicidal and needs help. Contact them and take them to a hospital to get a suicide assessment. If you can\'t reach them, call 911.'
       }, function (response) {
         res.send("Messages sent successfully");
