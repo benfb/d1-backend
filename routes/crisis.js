@@ -14,10 +14,11 @@ router.post('/', function(req, res) {
   for(var i = 0; i < req.body.selected.length; i++) {
     numbers.push(req.body.selected[i].numbers);
   }
+  console.log(numbers);
   for(var i = 0; i < numbers; i++) {
     telapi.create("sms_messages", {
         "From": process.env.TELAPI_NUMBER,
-        "To": number[i],
+        "To": numbers[i],
         "Body": req.body.user.name + ' is suicidal and needs help. Contact them and take them to a hospital to get a suicide assessment. If you can\'t reach them, call 911.'
       }, function (response) {
         res.send("Messages sent successfully");
