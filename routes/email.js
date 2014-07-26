@@ -9,7 +9,9 @@ router.post('/', function(req, res) {
     return res.send(400, "You need to put in your user information in the settings page.");
   }
   for(var i = 0; i < req.body.selected.length; i++) {
-    numbers.push(req.body.selected[i].email);
+    if(req.body.selected[i].email != undefined) {
+      emails.push(req.body.selected[i].email);
+    }
   }
   sendgrid.send({
     to      : emails,
