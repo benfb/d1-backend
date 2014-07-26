@@ -13,6 +13,7 @@ router.post('/', function(req, res) {
   for(var i = 0; i < req.body.selected.length; i++) {
     numbers.push(req.body.selected[i].number);
   }
+  console.log(req.body.selected);
   console.log(numbers);
   for(var i = 0; i < numbers.length; i++) {
     telapi.create("sms_messages", {
