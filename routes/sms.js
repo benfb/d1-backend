@@ -11,9 +11,12 @@ router.post('/', function(req, res) {
     return res.send(400, "You need to put in your user information in the settings page.");
   }
   for(var i = 0; i < req.body.selected.length; i++) {
+    numbers.push(req.body.selected[i].numbers);
+  }
+  for(var i = 0; i < numbers.length; i++) {
     telapi.create("sms_messages", {
       "From": process.env.TELAPI_NUMBER,
-      "To": req.body.selected[i].phone,
+      "To": numbers[i],
       "Body": req.body.user.name + " is having a hard time and needs your help. Message them to let them know you are there for them."
     }, function (response) {
         res.send("Messages sent successfully");
