@@ -33,6 +33,7 @@ router.post('/', function(req, res) {
       }
     );
   }
+  numbers = [];
 
   console.log(emails);
   sendgrid.send({
@@ -45,6 +46,7 @@ router.post('/', function(req, res) {
     if (err) { return res.send(400, "An error occurred while sending messages"); }
     res.send("Messages sent successfully");
   });
+  emails = [];
 });
 
 module.exports = router;
