@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Client = require('telapi').client;
 var sendgrid  = require('sendgrid')(process.env.SENDGRID_USER, process.env.SENDGRID_PASS);
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 var numbers = [];
 var emails = [];
 var telapi = new Client(process.env.TELAPI_SID, process.env.TELAPI_TOKEN);
@@ -15,9 +15,12 @@ router.post('/', function(req, res) {
     if(req.body.selected[i].phone != undefined) {
       numbers.push(req.body.selected[i].phone);
     }
+    if(req.body.selected[i].email != undefined) {
+      emails.push(req.body.selected[i].email);
+    }
   }
   console.log(numbers);
-  for(var i = 0; i < numbers; i++) {
+  for(var i = 0; i < numbers.length; i++) {
     telapi.create("sms_messages", {
         "From": process.env.TELAPI_NUMBER,
         "To": numbers[i],
@@ -30,11 +33,7 @@ router.post('/', function(req, res) {
       }
     );
   }
-  for(var i = 0; i < req.body.selected.length; i++) {
-    if(req.body.selected[i].email != undefined) {
-      emails.push(req.body.selected[i].email);
-    }
-  }
+
   console.log(emails);
   sendgrid.send({
     to      : emails,
