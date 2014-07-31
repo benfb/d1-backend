@@ -13,6 +13,7 @@ router.post('/', function(req, res) {
       emails.push(req.body.selected[i].email);
     }
   }
+  if(emails.length === 0) { return res.send(400, "None of the contacts you selected have a phone number.");}
   sendgrid.send({
     to      : emails,
     from    : process.env.SENDGRID_USER,

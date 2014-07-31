@@ -15,6 +15,7 @@ router.post('/', function(req, res) {
       numbers.push(req.body.selected[i].phone);
     }
   }
+  if(numbers.length === 0) { return res.send(400, "None of the contacts you selected have a phone number.");}
   console.log(req.body.selected);
   console.log(numbers);
   for(var i = 0; i < numbers.length; i++) {
