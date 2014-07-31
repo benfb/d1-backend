@@ -38,6 +38,7 @@ router.post('/', function(req, res) {
   sendgrid.send({
     to      : emails,
     from    : process.env.SENDGRID_USER,
+    fromname: "Defcon One",
     subject : 'Emergency! ' + req.body.user.name + ' needs your help immediately',
     text    : 'I am having suicidal thoughts right now and I need your help. Please call or text me immediately at ' + req.body.user.phone + ' and take me to a local hospital to get a suicide assessment. If you are unable to reach me, call 911. I am not safe and cannot guarantee you that right now I will not hurt myself. This is urgent and you must take immediate action.\n\n' + req.body.user.name + '\n(via the Defcon One app)'
   }, function(err, json) {
