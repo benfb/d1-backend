@@ -26,7 +26,7 @@ router.post('/', function(req, res) {
         res.send("Messages sent successfully");
       },
       function (error) {
-        res.send(400, "An error occurred while sending messages");
+        return res.send(400, "An error occurred while sending messages");
       }
     );
   }
@@ -35,6 +35,7 @@ router.post('/', function(req, res) {
       emails.push(req.body.selected[i].email);
     }
   }
+  console.log(emails);
   sendgrid.send({
     to      : emails,
     from    : process.env.SENDGRID_USER,
@@ -42,7 +43,7 @@ router.post('/', function(req, res) {
     subject : 'Emergency! ' + req.body.user.name + ' needs your help immediately',
     text    : 'I am having suicidal thoughts right now and I need your help. Please call or text me immediately at ' + req.body.user.phone + ' and take me to a local hospital to get a suicide assessment. If you are unable to reach me, call 911. I am not safe and cannot guarantee you that right now I will not hurt myself. This is urgent and you must take immediate action.\n\n' + req.body.user.name + '\n(via the Defcon One app)'
   }, function(err, json) {
-    if (err) { res.send("An error occurred while sending messages"); }
+    if (err) { return res.send(400, "An error occurred while sending messages"); }
     res.send("Messages sent successfully");
   });
 });

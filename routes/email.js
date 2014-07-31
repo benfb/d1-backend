@@ -21,7 +21,7 @@ router.post('/', function(req, res) {
     from    : process.env.SENDGRID_USER,
     fromname: "Defcon One",
     subject : req.body.user.name + ' needs your help',
-    text    : req.body.user.name + ' is having a hard time and needs your help. Message them at ' + req.body.user.phone + ' or ' + req.body.user.email + ' now to let them know you\'re there for them. \n\n-' +req.body.user.name + ' via Defcon One (http://defconone.us)'
+    text    : req.body.user.name + ' is having a hard time and needs your help. Message them at ' + req.body.user.phone + ' or mailto:' + req.body.user.email + ' now to let them know you\'re there for them. \n\n-' +req.body.user.name + ' via Defcon One (http://defconone.us)'
   }, function(err, json) {
     if (err) { res.send(400, "An error occurred while sending messages"); }
     res.send("Messages sent successfully");
